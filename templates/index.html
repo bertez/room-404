@@ -19,15 +19,44 @@
 			
 			</div>
 
-			<button id="goto-b" type="submit">Submit</button>
+			<button id="goto-b" type="submit" disabled>Submit</button>
 
 		</section>
 
 		<section id="scene-b" class="scene hidden">
+			<h1>Pick one</h1>
+
+			<div id="chosen_categories">
+			
+			</div>
+
+			<div id="form" class="submit-box">
+				<p>Share more</p>
+				<textarea id="confession"></textarea>
+				<p>How did this made you feel?</p>
+				<input type="range" id="score" value="1" min="1" max="5" step="1" />
+				<button disabled id="goto-c">Submit</button>
+			</div>
+
+			<div id="drop" class="dropspot">
+				drop here
+			</div>
 
 		</section>
 
 		<section id="scene-c" class="scene hidden">
+			<div class="pad">
+				<p id="mine">
+
+				</p>
+
+				<p id="other">
+
+				</p>
+			</div>
+			Are your better or worse?
+			<button id="better">Better</button>
+			<button id="worst">Worst</button>
 
 		</section>
 
@@ -40,6 +69,7 @@
 		</footer>
 
 		<script src="https://code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/helpers.js') }}"></script>
 		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/room404.js') }}"></script>
 

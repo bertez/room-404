@@ -13,6 +13,20 @@ body {
 	margin: 10px 10px 45px 10px;
 }
 
+.active {
+	background: #eee;
+}
+
+.submit-box {
+	width: 400px;
+	display: none;
+}
+
+.dropspot {
+	width: 400px;
+	height: 100px;
+	border: 1px solid black;
+}
 
 footer {
 	position: absolute;
