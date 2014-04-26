@@ -4,11 +4,44 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href='//fonts.googleapis.com/css?family=Exo+2:300,700' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     </head>
     <body>
+		<section id="intro" class="scene">
+			<h1>Room 404</h1>
+		</section>
+
+		<section id="scene-a" class="scene hidden">
+			<h1>Have you ever?</h1>
+
+			<div id="categories">
+			
+			</div>
+
+			<button id="goto-b" type="submit">Submit</button>
+
+		</section>
+
+		<section id="scene-b" class="scene hidden">
+
+		</section>
+
+		<section id="scene-c" class="scene hidden">
+
+		</section>
+
+		<section id="scene-d" class="scene hidden">
+
+		</section>
+
+		<footer>
+			<button>Start again?</button>
+		</footer>
+
+		<script src="https://code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/helpers.js') }}"></script>
+		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/room404.js') }}"></script>
 
     </body>
 </html>
