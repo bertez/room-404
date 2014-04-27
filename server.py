@@ -22,7 +22,7 @@ def categories():
 
     cur = get_db().cursor()
 
-    cur.execute('SELECT * from Categories')
+    cur.execute('SELECT * from Categories ORDER BY RANDOM() LIMIT 8')
 
     cats = cur.fetchall()
 
@@ -33,6 +33,7 @@ def categories():
         category_as_dict = {
                 'id': cat[0],
                 'name': cat[1],
+                'image': cat[2],
                 'total': total_confessions
                 }
         category_list.append(category_as_dict)
@@ -72,7 +73,7 @@ def save():
     db = get_db()
     cur = db.cursor()
 
-    cur.execute('INSERT INTO Confessions VALUES(NULL,{0},"{1}",{2})'.format(mine['category'], mine['text'], mine['score']))
+    cur.execute(u'INSERT INTO Confessions VALUES(NULL,{0},"{1}",{2})'.format(mine['category'], mine['text'], mine['score']))
     cur.execute('UPDATE Confessions SET score={0} WHERE id={1}'.format(other['score'], other['id']))
     db.commit()
 

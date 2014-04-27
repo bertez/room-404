@@ -8,7 +8,6 @@
 	var $scene_d = $('#scene-d');
 	var $category_list = $('#categories');
 	var $chosen_category_list = $('#chosen_categories');
-	var $dropspot = $('#drop');
 	var $form = $('#form');
 	var $pad = $('#pad');
 	var $mine = $('#mine');
@@ -16,6 +15,8 @@
 	var $enter = $('#enter');
 	var $final_my = $('#my_confession');
 	var $final_other = $('#other_confessions');
+	var $video = $('#video');
+	var $head = $('header');
 
 	// buttons
 	var $goto_b = $('#goto-b');
@@ -41,16 +42,22 @@
 		total_confessions = d.confessions;
 
 		$.each(d.categories, function(id, category) {
-			$('<div>').html(category.name)
-			.data('category', category)
-			.data('chosen', false)
-			.appendTo($category_list);
+			var $category_box = $('<div>')
+				.addClass('category col-md-3')
+				.data('category', category)
+				.data('chosen', false)
+				.appendTo($category_list);
+
+			$('<img>')
+				.attr('src', '/static/img/' + category.image)
+				.appendTo($category_box)
+
+			$('<span>')
+				.html(category.name)
+				.appendTo($category_box);
 		});
 
-		$intro.fadeOut('fast', function() {
-			$scene_a.fadeIn();
-			scene_a();
-		});
+		scene_a();
 
 	});
 
@@ -63,7 +70,6 @@
 			if(chosen) {
 				current_category.data('chosen', false);
 				current_category.removeClass('active');
-
 			} else {
 				current_category.data('chosen', true);
 				current_category.addClass('active');
@@ -99,31 +105,42 @@
 
 	// Scene B: choose one category and make a confession
 	function scene_b() {
+		$video.empty();
+		$head.animate({'height': '120px'});
+		$head.find('h1').animate({'margin-top': '10px'});
+
 		$.each(chosen_categories, function(id, category) {
-			var $category_box = $('<div>').html(category.name)
-			.data('category', category);
+			var $category_box = $('<div>')
+				.addClass('category col-md-3')
+				.data('category', category);
+
+			$('<img>')
+				.attr('src', '/static/img/' + category.image)
+				.appendTo($category_box);
 
 			$('<span>')
-			.addClass('percent')
-			.html(helpers.percent(category.total, total_confessions) + '%')
-			.appendTo($category_box);
+				.html(category.name)
+				.appendTo($category_box);
+
+			$('<span>')
+				.addClass('percent')
+				.html(helpers.percent(category.total, total_confessions) + '% chosen this')
+				.appendTo($category_box);
 
 
 			$category_box.appendTo($chosen_category_list);
 		});
 
-		$chosen_category_list.find('div').draggable();
-		$dropspot.droppable({
-			tolerance: 'touch',
-			drop: function(event, ui) {
-				var $drop = ui.draggable;
-				final_category = $drop.data('category');
-				$drop.hide();
-				$dropspot.slideUp();
+		$chosen_category_list.find('div').on('click', function(e) {
+				final_category = $(this).data('category');
+				$chosen_category_list.slideUp();
 				$form.slideDown();
-				$chosen_category_list.find('div').draggable('disable');
-			}
 		});
+
+		//please kill me for this
+		if(chosen_categories.length === 1){
+			$chosen_category_list.find('div').first().trigger('click');
+		}
 
 		$confession.on('keyup', function() {
 			if($(this).val().length) {
@@ -155,8 +172,14 @@
 
 	// Scene C: comparte to another Confession
 	function scene_c(other) {
-		$mine.html(confession.text);
-		$other.html(other.text);
+
+		var my_text = $('<p>')
+		.html(confession.text)
+		.appendTo($mine);
+
+		var their_text = $('<p>')
+		.html(other.text)
+		.appendTo($other);
 
 		$better.on('click', function(e){
 			confession.score = Math.max(0, confession.score - 1);
@@ -189,6 +212,7 @@
 		}
 	}
 
+	// The room404 itself
 	function scene_d(data) {
 		$final_my.html(data.mine.text + ' Score: ' + data.mine.score);
 		$.each(data.other, function(id, other) {
