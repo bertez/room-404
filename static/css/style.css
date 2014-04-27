@@ -22,6 +22,12 @@ body {
 	display: none;
 }
 
+.percent {
+	display: block;
+	font-size: .8em;
+
+}
+
 .dropspot {
 	width: 400px;
 	height: 100px;
