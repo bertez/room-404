@@ -13,5 +13,9 @@ var helpers = {
 					//handle this
 				}
 			});
+	},
+	shuffle: function(o) { //http://dzone.com/snippets/array-shuffle-javascript
+		for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+		return o;
 	}
 };

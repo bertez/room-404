@@ -74,10 +74,11 @@ def save():
     cur = db.cursor()
 
     cur.execute(u'INSERT INTO Confessions VALUES(NULL,{0},"{1}",{2})'.format(mine['category'], mine['text'], mine['score']))
+    not_this = cur.lastrowid
     cur.execute('UPDATE Confessions SET score={0} WHERE id={1}'.format(other['score'], other['id']))
     db.commit()
 
-    cur.execute('SELECT * from Confessions ORDER BY RANDOM() LIMIT 20');
+    cur.execute('SELECT * from Confessions WHERE id != {0} ORDER BY RANDOM() LIMIT 20 '.format(not_this));
 
     confession_list = []
 

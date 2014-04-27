@@ -97,13 +97,8 @@
 			</section>
 
 			<section id="scene-d" class="scene nope">
-				<h1>Your confession</h1>
-
-				<div id="my_confession"></div>
-
-				<h1>Other people confessions</h1>
-
-				<div id="other_confessions"></div>
+				<div id="grid" data-columns>
+				</div>
 
 			</section>
 		</div>
@@ -125,6 +120,7 @@
 		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+		<script type="text/javascript" charset="utf-8" src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/helpers.js') }}"></script>
 		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/room404.js') }}"></script>
 

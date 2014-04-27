@@ -17,6 +17,7 @@
 	var $final_other = $('#other_confessions');
 	var $video = $('#video');
 	var $head = $('header');
+	var $grid = $('#grid');
 
 	// buttons
 	var $goto_b = $('#goto-b');
@@ -182,14 +183,14 @@
 		.appendTo($other);
 
 		$better.on('click', function(e){
-			confession.score = Math.max(0, confession.score - 1);
+			confession.score = Math.max(1, confession.score - 1);
 			other.score = Math.min(5, other.score + 1);
 			process();
 		});
 
 		$worse.on('click', function(e){
 			confession.score = Math.min(5, confession.score + 1);
-			other.score = Math.max(0, other.score - 1);
+			other.score = Math.max(1, other.score - 1);
 			process();
 		});
 
@@ -214,12 +215,29 @@
 
 	// The room404 itself
 	function scene_d(data) {
+		var elements = [];
+
+		var my_confession = $('<span>')
+			.addClass('grid mine score' + data.mine.score)
+			.html(data.mine.text);
+
+		elements.push(my_confession);
+
 		$final_my.html(data.mine.text + ' Score: ' + data.mine.score);
 		$.each(data.other, function(id, other) {
-			$('<div>')
-			.html(other.text + ' Score: ' + other.score)
-			.appendTo($final_other);
+			var their_confession = $('<span>')
+				.addClass('grid score' + other.score)
+				.html(other.text);
+
+			elements.push(their_confession);
 		});
+
+		helpers.shuffle(elements);
+
+		$.each(elements, function(id, element) {
+			$grid.append(element);
+		});
+
 	}
 
 })(jQuery);
