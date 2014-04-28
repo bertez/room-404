@@ -30,7 +30,7 @@ def categories():
     cats = cur.fetchall()
 
     for cat in cats:
-        cur.execute('SELECT id from Confessions where id_category=?', cat[0])
+        cur.execute('SELECT id from Confessions where id_category=?', (cat[0],))
         total_confessions = len(cur.fetchall())
 
         category_as_dict = {
@@ -57,7 +57,7 @@ def confess():
 
     cur = get_db().cursor()
 
-    cur.execute('SELECT * from Confessions where id_category=? ORDER BY RANDOM() LIMIT 1', chosen_category)
+    cur.execute('SELECT * from Confessions where id_category=? ORDER BY RANDOM() LIMIT 1', (chosen_category,))
 
     confession = cur.fetchone()
 
@@ -83,7 +83,7 @@ def save():
     cur.execute('UPDATE Confessions SET score=? WHERE id=?', (other['score'], other['id']))
     db.commit()
 
-    cur.execute('SELECT * from Confessions WHERE id != ? ORDER BY RANDOM() LIMIT 20 ', not_this)
+    cur.execute('SELECT * from Confessions WHERE id != ? ORDER BY RANDOM() LIMIT 20 ', (not_this,))
 
     confession_list = []
 
