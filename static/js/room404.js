@@ -38,7 +38,7 @@
 	var confession;
 
 	// Initial setup
-	$.get('/categories', function(d) {
+	helpers.request('GET', '/categories', null, function(d) {
 		//create the initial category list
 		total_confessions = d.confessions;
 
@@ -51,7 +51,7 @@
 
 			$('<img>')
 				.attr('src', '/static/img/' + category.image)
-				.appendTo($category_box)
+				.appendTo($category_box);
 
 			$('<span>')
 				.html(category.name)
@@ -158,7 +158,7 @@
 				score: $score.val()
 			};
 
-			helpers.request('/confess', confession, function(response) {
+			helpers.request('POST', '/confess', confession, function(response) {
 				$scene_b.fadeOut('fast', function() {
 					$scene_c.fadeIn();
 					scene_c(response);
@@ -200,7 +200,7 @@
 				'other': other
 			};
 
-			helpers.request('/save', payload, function(response) {
+			helpers.request('POST', '/save', payload, function(response) {
 				$pad.slideUp();
 				$enter.slideDown();
 				$go.on('click', function() {

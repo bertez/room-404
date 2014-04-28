@@ -13,6 +13,15 @@ def get_db():
         db = g._database = sqlite3.connect(DATABASE)
     return db
 
+def control_rows():
+    db = get_db()
+    cur = db.cursor()
+
+    #control number of rows
+    print 'deleting old rows'
+    cur.execute('DELETE FROM Confessions where id NOT IN (SELECT id from Confessions ORDER BY id DESC LIMIT 1000)')
+    db.commit()
+
 
 @app.route('/')
 def start():
@@ -78,9 +87,13 @@ def save():
     db = get_db()
     cur = db.cursor()
 
+    #Insert
     cur.execute(u'INSERT INTO Confessions VALUES(NULL,?,?,?)', (mine['category'], mine['text'], mine['score']))
     not_this = cur.lastrowid
+
+    #Update other score
     cur.execute('UPDATE Confessions SET score=? WHERE id=?', (other['score'], other['id']))
+
     db.commit()
 
     cur.execute('SELECT * from Confessions WHERE id != ? ORDER BY RANDOM() LIMIT 20 ', (not_this,))
@@ -101,6 +114,9 @@ def save():
         'mine': mine,
         'other': confession_list
     }
+
+    control_rows()
+
     return Response(json.dumps(room_content), mimetype='application/json')
 
 

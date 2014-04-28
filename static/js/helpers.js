@@ -2,15 +2,19 @@ var helpers = {
 	percent: function(count, total) {
 		return Math.round((count * 100) / total);
 	},
-	request: function(url, data, fn) {
+	request: function(method, url, data, fn) {
 			$.ajax({
-				method: 'POST',
+				method: method,
 				url: url,
-				data: JSON.stringify(data),
+				data: data ? JSON.stringify(data) : null,
 				contentType: 'application/json',
 				success: fn,
 				error: function(response){
 					//handle this
+					$('<div>')
+					.html('Sorry, something broke. Please reload the page to try again.')
+					.addClass('error')
+					.appendTo('body');
 				}
 			});
 	},
