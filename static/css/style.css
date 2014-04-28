@@ -116,17 +116,18 @@ textarea {
 }
 
 #grid{
-	font-size: 2em;
+	font-size: 1.5em;
 	text-align: center;
-	margin-top:50px;
 }
 
 .grid{
-	padding: 10px;
+	padding: 20px;
+	display: inline-block;
+	
 }
 
 .mine {
-	background: #000 !important;
+	background: blue !important;
 	color: #fff;
 }
 
@@ -141,7 +142,7 @@ textarea {
 	font-size: 2em;
 }
 .score4{
-	font-size: 2.5m;
+	font-size: 2.5em;
 }
 .score5{
 	font-size: 3em;

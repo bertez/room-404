@@ -125,7 +125,7 @@
 
 			$('<span>')
 				.addClass('percent')
-				.html(helpers.percent(category.total, total_confessions) + '% chosen this')
+				.html(helpers.percent(category.total, total_confessions) + '% of others have done this')
 				.appendTo($category_box);
 
 
