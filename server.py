@@ -7,7 +7,7 @@ app = Flask(__name__)
 DATABASE = 'data.db'
 MAX_SCORE = 5
 MIN_SCORE = 1
-DEFAULT_TEXT = 'I cheated using Room 404 and it was bad'
+DEFAULT_TEXT = 'I tried to cheat Room 404 and it did not work out'
 MAX_TEXT_LENGTH = 300
 
 secret = '' #set your secret key here
