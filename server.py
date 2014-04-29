@@ -1,7 +1,7 @@
 import json
 import sqlite3
 from flask import Flask
-from flask import render_template, Response, request, g
+from flask import render_template, Response, request, g, session
 
 app = Flask(__name__)
 DATABASE = 'data.db'
@@ -9,6 +9,15 @@ MAX_SCORE = 5
 MIN_SCORE = 1
 DEFAULT_TEXT = 'I cheated using Room 404 and it was bad'
 MAX_TEXT_LENGTH = 300
+
+secret = '' #set your secret key here
+
+try:
+    from production_cfg import secret
+except ImportError:
+    pass
+
+app.secret_key = secret
 
 
 def get_db():
@@ -79,6 +88,8 @@ def confess():
         'score': confession[3]
     }
 
+    session['other_id'] = other_confession
+
     return Response(json.dumps(other_confession), mimetype='application/json')
 
 
@@ -90,22 +101,24 @@ def save():
     cur = db.cursor()
 
     available_categories = [x[0] for x in cur.execute('SELECT id from Categories').fetchall()]
-    
+
     #extra sanitizing
     _category = mine['category'] in available_categories or 1
     _text = mine['text'] or DEFAULT_TEXT
     _text = _text[:MAX_TEXT_LENGTH]
     _score = sorted([MIN_SCORE, mine['score'], MAX_SCORE])[1]
-    _other_score = sorted([MIN_SCORE, other['score'], MAX_SCORE])[1]
+    _other_id = session['other_id']['id']
+    _other_score = sorted([session['other_id']['score'] - 1, other['score'],session['other_id']['score'] + 1 ])[1]
 
     #Insert
     cur.execute(u'INSERT INTO Confessions VALUES(NULL,?,?,?)', (_category, _text, _score))
     not_this = cur.lastrowid
 
     #Update other score
-    cur.execute('UPDATE Confessions SET score=? WHERE id=?', (_other_score, other['id']))
+    cur.execute('UPDATE Confessions SET score=? WHERE id=?', (_other_score, _other_id))
 
     db.commit()
+    session.clear()
 
     cur.execute('SELECT Confessions.text, Confessions.score, Categories.image from Confessions, Categories WHERE Categories.id = Confessions.id_category AND Confessions.id != ? ORDER BY RANDOM() LIMIT 20 ', (not_this,))
 
