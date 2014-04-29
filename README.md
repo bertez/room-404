@@ -1,8 +1,8 @@
 #Room404
 
-The destination for all your online mistakes.
+"The destination for all your online mistakes."
 
-This demo was developed during the 2014 Darklight Festival Hack Jam in Dublin.
+This demo was developed by [Kathryn Parkes](https://twitter.com/kathrynparkes), [Sabina Bonnici](https://twitter.com/sabinabonnici), [Philo van Kemenade](https://twitter.com/phivk) and [Berto Yáñez](https://twitter.com/bertez) with the help and feedback from the other participants of the 2014 Darklight Festival Hack Jam in Dublin.
 
 This demo is available online at: [http://room404.thepartylaunch.com/](http://room404.thepartylaunch.com/)
 
