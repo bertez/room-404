@@ -1,18 +1,19 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Room 404</title>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Room 404</title>
+
+		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
 		<link href='http://fonts.googleapis.com/css?family=Exo:400,500,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-    <body>
-		<header class="main">
-			<div class="container">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<body>
+		<header>
+			<div class="main-head container">
 				<div class="row">
 					<div class="col-md-6">
 						<h1><a href="/">Room 404</a></h1>
@@ -21,32 +22,31 @@
 					<div id="video" class="col-md-6">
 						<iframe src="//player.vimeo.com/video/93063503" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
-
 				</div>
-
 			</div>
-			
-			
+			<div class="container">
+				<div class="room" id="room" data-columns></div>
+			</div>
 		</header>
 		<div class="container">
 			<section id="scene-a" class="scene">
-				<h1>Have you ever...?</h1>
+			<h1>Have you ever...?</h1>
 
-				<div id="categories" class="categories_list row">
-				
-				</div>
+			<div id="categories" class="categories_list row">
 
-				<button id="goto-b" type="submit" class="btn btn-404" disabled>Next</button>
-				<div>Step 1 of 3</div>
+			</div>
+
+			<button id="goto-b" type="submit" class="btn btn-404" disabled>Next</button>
+			<div>Step 1 of 3</div>
 
 			</section>
 
 			<section id="scene-b" class="scene nope">
 
-				<div id="chosen_categories" class="categories_list row">
+			<div id="chosen_categories" class="categories_list row">
 				<h1>You really did that? Well, you're not alone. Room 404 is getting quite full, so nominate just one of your mistakes to send there.</h1>
-				
-				</div>
+
+			</div>
 
 			<div id="form" class="submit-box nope row">
 				<h1>Tell us a little more</h1>
@@ -57,22 +57,22 @@
 					<span>Mild Blush</span>
 				</div>
 
-					<div class="col-md-6 text-right range">
-						<img alt="Mild blush" src="{{ url_for('static', filename='img/scarlet.jpg') }}">
-						<span>Scarlet</span>
-					</div>
-					<input type="range" id="score" value="1" min="1" max="5" step="1" />
-					<button class="btn btn-404" disabled id="goto-c">Next</button>
-					<div>Step 2 of 3</div>
+				<div class="col-md-6 text-right range">
+					<img alt="Mild blush" src="{{ url_for('static', filename='img/scarlet.jpg') }}">
+					<span>Scarlet</span>
 				</div>
+				<input type="range" id="score" value="1" min="1" max="5" step="1" />
+				<button class="btn btn-404" disabled id="goto-c">Next</button>
+				<div>Step 2 of 3</div>
+			</div>
 
 			</section>
 
 			<section id="scene-c" class="scene nope">
 
-				<div id="pad" class="row">
-					<h1>Rate your mistake against someone else's</h1>
-					<div class="row">
+			<div id="pad" class="row">
+				<h1>Rate your mistake against someone else's</h1>
+				<div class="row">
 					<div id="mine" class="col-md-6">
 						<h2>Your mistake</h2>
 					</div>
@@ -80,9 +80,9 @@
 					<div id="other" class="col-md-6">
 						<h2>Their mistake</h2>
 					</div>
-					</div>
-					<h2 class="separator">Which is worse?</h2>
-					<div class="row">
+				</div>
+				<h2 class="separator">Which is worse?</h2>
+				<div class="row">
 					<div class="col-md-6">
 						<button id="better" class="btn btn-404">Yours</button>
 					</div>
@@ -90,41 +90,39 @@
 						<button id="worse" class="btn btn-404">Theirs</button>
 					</div>
 				</div>
-				</div>
+			</div>
 
-				<div id="enter" class="nope row">
-					<h1>Your mistake is bad enough for Room 404</h1>
-					<button id="go" class="btn btn-404">Enter Room 404</button>
-				</div>
-
-			</section>
-
-			<section id="scene-d" class="scene nope">
-				<div id="grid" data-columns>
-				</div>
+			<div id="enter" class="nope row">
+				<h1>Your mistake is bad enough for Room 404</h1>
+				<button id="go" class="btn btn-404">Enter Room 404</button>
+			</div>
 
 			</section>
+
 		</div>
 
 		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<p>Darklight Festival – Popathon – Storytelling Hackathon</p>
-					</div>
-					<div class="col-md-6 text-right">
-					</div>
-
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<p>Darklight Festival – Popathon – Storytelling Hackathon</p>
 				</div>
+				<div class="col-md-6 text-right">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="popathon">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+
 			</div>
+		</div>
 		</footer>
 
 		<script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/helpers.js') }}"></script>
-		<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/room404.js') }}"></script>
+		<script src="//cdn.jsdelivr.net/salvattore/1.0.4/salvattore.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="{{ url_for('static', filename='js/helpers.js') }}" type="text/javascript" charset="utf-8"></script>
+		<script src="{{ url_for('static', filename='js/room404.js') }}" type="text/javascript" charset="utf-8"></script>
 
-    </body>
+	</body>
 </html>

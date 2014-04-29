@@ -1,11 +1,9 @@
 //sorry for the quick and dirty code
 (function($) {
 	//elements
-	var $intro = $('#intro');
 	var $scene_a = $('#scene-a');
 	var $scene_b = $('#scene-b');
 	var $scene_c = $('#scene-c');
-	var $scene_d = $('#scene-d');
 	var $category_list = $('#categories');
 	var $chosen_category_list = $('#chosen_categories');
 	var $form = $('#form');
@@ -17,7 +15,7 @@
 	var $final_other = $('#other_confessions');
 	var $video = $('#video');
 	var $head = $('header');
-	var $grid = $('#grid');
+	var $room = $('#room');
 
 	// buttons
 	var $goto_b = $('#goto-b');
@@ -32,7 +30,6 @@
 
 	// data variables
 	var total_confessions;
-	var available_categories; 
 	var chosen_categories = [];
 	var final_category;
 	var confession;
@@ -143,16 +140,23 @@
 			$chosen_category_list.find('div').first().trigger('click');
 		}
 
-		$confession.on('keyup', function() {
-			if($(this).val().length) {
+		$confession.on('keyup', function(e) {
+			var text  = $(this).val();
+
+			if(text.length) {
 				$goto_c.removeAttr('disabled');
 			} else {
 				$goto_c.attr('disabled', 'disabled');
+			}
+
+			if(text.length > 300) {
+				$(this).val(text.substr(0, 300));
 			}
 		});
 
 		$goto_c.on('click', function(e) {
 			confession = {
+				image: final_category.image,
 				category: final_category.id,
 				text: $confession.val(),
 				score: $score.val()
@@ -205,7 +209,6 @@
 				$enter.slideDown();
 				$go.on('click', function() {
 					$scene_c.fadeOut('fast', function() {
-						$scene_d.fadeIn();
 						scene_d(response);
 					});
 				});
@@ -217,27 +220,57 @@
 	function scene_d(data) {
 		var elements = [];
 
-		var my_confession = $('<span>')
-			.addClass('grid mine score' + data.mine.score)
-			.html(data.mine.text);
+		function push_element(image, text, score, mine) {
+			var new_element = $('<div>')
+								.addClass('grid')
+								.addClass(mine ? 'mine' : '');
 
-		elements.push(my_confession);
+			$('<img>')
+				.attr('src', '/static/img/' + image)
+				.appendTo(new_element);
 
-		$final_my.html(data.mine.text + ' Score: ' + data.mine.score);
+			$('<span>')
+				.html(text)
+				.addClass('score' + score)
+				.appendTo(new_element);
+
+			elements.push(new_element[0]);
+		
+		}
+
+		push_element(data.mine.image, data.mine.text, data.mine.score, true);
+
 		$.each(data.other, function(id, other) {
-			var their_confession = $('<span>')
-				.addClass('grid score' + other.score)
-				.html(other.text);
-
-			elements.push(their_confession);
+			push_element(other.image, other.text, other.score, false);
 		});
 
 		helpers.shuffle(elements);
 
-		$.each(elements, function(id, element) {
-			$grid.append(element);
-		});
+		$head.find('.main-head').remove();
+		$room.css({'margin-top': '50px'});
+		$head.animate({'height': '2000px'}, 500, function() {
+			var new_height = 0;
+			salvattore['append_elements']($room[0], elements);
 
+			$head.find('.column').each(function() {
+				new_height = Math.max($(this).height(), new_height);
+			});
+
+			$(this).css({'height': new_height + 200 + 'px'});
+
+			var $restart = $('<div>')
+							.addClass('restart');
+
+			$('<a>')
+				.html('Start again?')
+				.appendTo($restart)
+				.on('click', function() {
+					location.reload();
+				
+				});
+
+			$restart.appendTo($head);
+		});
 	}
 
 })(jQuery);
