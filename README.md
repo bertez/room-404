@@ -4,6 +4,8 @@ The destination for all your online mistakes.
 
 This demo was developed during the 2014 Darklight Festival Hack Jam in Dublin.
 
+This demo is available online at: [http://room404.thepartylaunch.com/](http://room404.thepartylaunch.com/)
+
 ##Installation
 
 * Create a python [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/) (optional, but recommended)
