@@ -63,6 +63,10 @@ header p{
 	color: #fff;
 }
 
+header .restart{
+	display:none;
+}
+
 header iframe{
 	margin-top: 40px;
 }
@@ -70,13 +74,13 @@ header iframe{
 .categories_list .category{
 	font-size: 1.2em;
 	cursor: pointer;
-	height: 315px;
+	/*height: 350px;*/
 	margin-bottom: 10px;
 }
 
-.category span{
+.category span:not(.percent){
 	display: block;
-	height: 50px;
+	height: 90px;
 	padding: 5px;
 }
 .category img{

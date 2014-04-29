@@ -16,6 +16,7 @@
 	var $video = $('#video');
 	var $head = $('header');
 	var $room = $('#room');
+	var $restart = $('#restart');
 
 	// buttons
 	var $goto_b = $('#goto-b');
@@ -258,18 +259,8 @@
 
 			$(this).css({'height': new_height + 200 + 'px'});
 
-			var $restart = $('<div>')
-							.addClass('restart');
+			$restart.show();
 
-			$('<a>')
-				.html('Start again?')
-				.appendTo($restart)
-				.on('click', function() {
-					location.reload();
-				
-				});
-
-			$restart.appendTo($head);
 		});
 	}
 
