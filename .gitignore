@@ -1,3 +1,4 @@
+dev_config
 .DS_Store
 data.db
 production_cfg.py

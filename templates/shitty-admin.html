@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Room 404: admin</title>
+
+		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+		<link href='http://fonts.googleapis.com/css?family=Exo:400,500,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin-style.css') }}">
+	</head>
+	<body class="admin">
+		<header>
+			<div class="main-head container">
+				<h1>Room 404 shitty admin interface</h1>
+			</div>
+		</header>
+		<div class="container">
+			<h2>Latests confessions</h2>
+
+			<ul id="log">
+				{% for entry in log %}
+				<li>{{ entry.text }} <button data-id="{{entry.id}}">Delete</button></li>
+				{% else %}
+					<li><em>Unbelievable.  No entries here so far</em></li>
+				{% endfor %}
+			</ul>
+		
+		</div>
+
+		<footer>
+		</footer>
+
+		<script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+		<script src="{{ url_for('static', filename='js/helpers.js') }}" type="text/javascript" charset="utf-8"></script>
+		<script src="{{ url_for('static', filename='js/admin.js') }}" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+</html>

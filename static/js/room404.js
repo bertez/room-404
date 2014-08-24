@@ -1,3 +1,5 @@
+/* global helpers, salvattore, jQuery */
+
 //sorry for the quick and dirty code
 (function($) {
 	//elements
@@ -42,7 +44,7 @@
 
 		$.each(d.categories, function(id, category) {
 			var $category_box = $('<div>')
-				.addClass('category col-md-3')
+				.addClass('category col-xs-3')
 				.data('category', category)
 				.data('chosen', false)
 				.appendTo($category_list);
@@ -87,8 +89,10 @@
 
 			if(chosen_categories.length) {
 				$goto_b.removeAttr('disabled');
+				$goto_b.next().hide();
 			} else {
 				$goto_b.attr('disabled', 'disabled');
+				$goto_b.next().show();
 			}
 		}
 
@@ -110,7 +114,7 @@
 
 		$.each(chosen_categories, function(id, category) {
 			var $category_box = $('<div>')
-				.addClass('category col-md-3')
+				.addClass('category col-xs-3')
 				.data('category', category);
 
 			$('<img>')
@@ -146,8 +150,10 @@
 
 			if(text.length) {
 				$goto_c.removeAttr('disabled');
+				$goto_c.next().hide();
 			} else {
 				$goto_c.attr('disabled', 'disabled');
+				$goto_c.next().show();
 			}
 
 			if(text.length > 300) {
@@ -251,7 +257,7 @@
 		$room.css({'margin-top': '50px'});
 		$head.animate({'height': '2000px'}, 500, function() {
 			var new_height = 0;
-			salvattore['append_elements']($room[0], elements);
+			salvattore.append_elements($room[0], elements);
 
 			$head.find('.column').each(function() {
 				new_height = Math.max($(this).height(), new_height);
@@ -263,5 +269,14 @@
 
 		});
 	}
+
+var $footer_logo = $('#footer_logo');
+var $footer_credits = $('#footer_credits');
+
+$footer_logo.on('click', function() {
+	$footer_logo.slideUp();
+	$footer_credits.slideDown();
+
+});
 
 })(jQuery);

@@ -2,6 +2,7 @@ import json
 import sqlite3
 from flask import Flask
 from flask import render_template, Response, request, g, session
+from auth import requires_auth
 
 app = Flask(__name__)
 DATABASE = 'data.db'
@@ -31,7 +32,7 @@ def control_rows():
     cur = db.cursor()
 
     #control number of rows
-    cur.execute('DELETE FROM Confessions where id NOT IN (SELECT id from Confessions ORDER BY id DESC LIMIT 1000)')
+    cur.execute('DELETE FROM Confessions where id NOT IN (SELECT id from Confessions ORDER BY id DESC LIMIT 5000)')
     db.commit()
 
 
@@ -143,6 +144,30 @@ def save():
 
     return Response(json.dumps(room_content), mimetype='application/json')
 
+@app.route('/admin', methods = ['GET', 'POST'])
+@requires_auth
+def admin():
+    db = get_db()
+    cur = get_db().cursor()
+
+    if request.method == 'POST':
+        delete_id = request.json['id']
+        print delete_id
+
+        try:
+            cur.execute('DELETE from Confessions WHERE id=?', (delete_id,))
+            db.commit()
+            return 'OK'
+        except sqlite3.Error, msg:
+            print msg
+            return msg, 500
+
+
+    cur.execute('SELECT id, text from Confessions ORDER BY id desc')
+
+    log = [dict(id=row[0], text=row[1]) for row in cur.fetchall()]
+
+    return render_template('shitty-admin.html', log=log)
 
 @app.teardown_appcontext
 def close_connection(exception):

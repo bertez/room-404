@@ -11,6 +11,8 @@ var helpers = {
 				success: fn,
 				error: function(response){
 					//handle this
+					console.log(response);
+
 					$('<div>')
 					.html('Sorry, something broke. Please reload the page to try again.')
 					.addClass('error')

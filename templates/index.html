@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>Room 404</title>
 
 		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
@@ -15,11 +14,11 @@
 		<header>
 			<div class="main-head container">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-xs-6">
 						<h1><a href="/">Room 404</a></h1>
 						<p>The destination for all your online mistakes</p>
 					</div>
-					<div id="video" class="col-md-6">
+					<div id="video" class="col-xs-6">
 						<iframe src="//player.vimeo.com/video/93063503" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
 				</div>
@@ -34,12 +33,14 @@
 		<div class="container">
 			<section id="scene-a" class="scene">
 			<h1>Have you ever...?</h1>
+			<p>Go on, fess up.  Pick all the ones you’ve done</p>
 
 			<div id="categories" class="categories_list row">
 
 			</div>
 
 			<button id="goto-b" type="submit" class="btn btn-404" disabled>Next</button>
+			<div class="tip">Please, select one or more of the above categories to proceed</div>
 			<div>Step 1 of 3</div>
 
 			</section>
@@ -49,23 +50,26 @@
 			<div id="chosen_categories" class="categories_list row">
 				<h1>You really did that? Well, you're not alone. Room 404 is getting quite full, so nominate just one of your mistakes to send there.</h1>
 
+				<p>Choose one:</p>
+
 			</div>
 
 			<div id="form" class="submit-box nope row">
 				<h1>Tell us a little more</h1>
-				<textarea id="confession"></textarea>
+				<textarea id="confession" placeholder="A brief description of your mistake.  This will be shared with all other visitors to Room 404."></textarea>
 				<h1>Rate how this made you feel on the Morto Meter.</h1>
-				<div class="col-md-6 range">
+				<div class="col-xs-6 range">
 					<img alt="Mild blush" src="{{ url_for('static', filename='img/blush.jpg') }}">
 					<span>Mild Blush</span>
 				</div>
 
-				<div class="col-md-6 text-right range">
+				<div class="col-xs-6 text-right range">
 					<img alt="Mild blush" src="{{ url_for('static', filename='img/scarlet.jpg') }}">
 					<span>Scarlet</span>
 				</div>
 				<input type="range" id="score" value="1" min="1" max="5" step="1" />
 				<button class="btn btn-404" disabled id="goto-c">Next</button>
+				<div class="tip">Please, write something above to continue</div>
 				<div>Step 2 of 3</div>
 			</div>
 
@@ -76,20 +80,20 @@
 			<div id="pad" class="row">
 				<h1>Rate your mistake against someone else's</h1>
 				<div class="row">
-					<div id="mine" class="col-md-6">
+					<div id="mine" class="col-xs-6">
 						<h2>Your mistake</h2>
 					</div>
 
-					<div id="other" class="col-md-6">
+					<div id="other" class="col-xs-6">
 						<h2>Their mistake</h2>
 					</div>
 				</div>
 				<h2 class="separator">Which is worse?</h2>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-xs-6">
 						<button id="better" class="btn btn-404">Yours</button>
 					</div>
-					<div class="col-md-6">
+					<div class="col-xs-6">
 						<button id="worse" class="btn btn-404">Theirs</button>
 					</div>
 				</div>
@@ -107,11 +111,16 @@
 		<footer>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-					<p>Darklight Festival – Popathon – Storytelling Hackathon</p>
-					<p><a href="https://github.com/bertez/room-404">Source code available on Github</a></p>
+				<div class="col-xs-6">
+					<div id="footer_logo">
+						<img alt="The Party" src="{{ url_for('static', filename='img/footer.jpg') }}" />
+					</div>
+					<div id="footer_credits">
+						<p>Concept conceived, designed and developed by Kathyrn Parkes, Sabina Bonnici & Berto Yanez as part of Popathon at Darklight.</p>
+						<p><a href="https://github.com/bertez/room-404">Source code available on Github</a></p>
+					</div>
 				</div>
-				<div class="col-md-6 text-right">
+				<div class="col-xs-6 text-right">
 				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="popathon">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 				</div>
