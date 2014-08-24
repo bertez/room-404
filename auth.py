@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import request, Response
 
-username_404 = 'guest'
+username_404 = 'admin'
 pass_404 = 'CHANGE-ME'
 
 try:

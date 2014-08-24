@@ -152,7 +152,8 @@ def admin():
 
     if request.method == 'POST':
         delete_id = request.json['id']
-        print delete_id
+        if delete_id < 15:
+            return 'Nope', 500
 
         try:
             cur.execute('DELETE from Confessions WHERE id=?', (delete_id,))
@@ -163,7 +164,7 @@ def admin():
             return msg, 500
 
 
-    cur.execute('SELECT id, text from Confessions ORDER BY id desc')
+    cur.execute('SELECT id, text from Confessions WHERE id >= 15 ORDER BY id desc')
 
     log = [dict(id=row[0], text=row[1]) for row in cur.fetchall()]
 
